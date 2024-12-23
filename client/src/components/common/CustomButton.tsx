@@ -2,9 +2,10 @@ import React from 'react'
 import { CustomButtonProps } from '../../interfaces/common'
 import { Button } from '@mui/material'
 
-const CustomButton = ({type, title, backgroundColor, color,fullWidth, icon, handleClick}:CustomButtonProps) => {
+const CustomButton = ({type, title, backgroundColor, color,fullWidth, icon, handleClick, disabled}:CustomButtonProps) => {
   return (
     <Button
+      type={type==='submit'?'submit':'button'}
       sx={{
         flex: fullWidth? 1: 'unset',
         padding: '10px 15px',
@@ -22,6 +23,7 @@ const CustomButton = ({type, title, backgroundColor, color,fullWidth, icon, hand
         }
       }}
       onClick={handleClick}
+      disabled={disabled}
     >
       {icon}
       {title}

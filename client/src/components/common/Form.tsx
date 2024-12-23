@@ -2,9 +2,12 @@ import React from 'react'
 import { FormProps } from '../../interfaces/common'
 import { Box, Button, FormControl, FormHelperText, MenuItem, Select, Stack, TextareaAutosize, TextField, Typography } from '@mui/material'
 import CustomButton from './CustomButton'
+import propertyTypesArray from './datas'
 
 const Form = ({
-  type, register, onFinish, formLoading, handleSubmit, handleImageChange, onFinishHandler, propertyImage}:FormProps) => {
+    type, register, onFinish, formLoading, handleSubmit,
+    handleImageChange, onFinishHandler, propertyImage
+  }:FormProps) => {
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color='#11142d'>
@@ -54,14 +57,10 @@ const Form = ({
                 defaultValue="apartment"
                 {...register('propertyType',{required:true})}
               >
-                <MenuItem value="apartment">Apartment</MenuItem>
-                <MenuItem value="villa">Villa</MenuItem>
-                <MenuItem value="farmhouse">Farm House</MenuItem>
-                <MenuItem value="candos">Candos</MenuItem>
-                <MenuItem value="townhouse">Town House</MenuItem>
-                <MenuItem value="duplex">Duplex</MenuItem>
-                <MenuItem value="studio">Studio</MenuItem>
-                <MenuItem value="chalet">Chalet</MenuItem>
+                {propertyTypesArray.map((type)=>(
+                  <MenuItem key={type} value={type.toLowerCase()}>{type}</MenuItem>
+                ))}
+
               </Select>
             </FormControl>
             <FormControl>

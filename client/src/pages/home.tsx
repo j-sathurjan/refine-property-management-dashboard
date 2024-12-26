@@ -15,6 +15,17 @@ import {
 import { grey } from '@mui/material/colors'
 
 const home = () => {
+  const {data, isLoading, isError} = useList({
+    resource:'properties',
+    config:{
+      pagination:{
+        pageSize:5
+      }
+    }
+  })
+  const latestProperties= data?.data??[];
+  if(isLoading) return <div>Loading...</div>
+  if(isError) return <div>Error</div>
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color='#11142D'>
@@ -51,6 +62,32 @@ const home = () => {
         <TotalRevenue/>
         <PropertyReferrals/>
       </Stack>
+      <Box
+        flex={1}
+        borderRadius='15px'
+        padding='20px'
+        bgcolor='#fcfcfc'
+        display='flex'
+        flexDirection='column'
+        minWidth='100%'
+        mt='25px'
+      >
+        <Typography fontSize={18} fontWeight={600} color='#11142d'>
+          Latest Properties
+        </Typography>
+        <Box mt={2.5} sx={{display:'flex', flexWrap:'wrap', gap:4}}>
+          {latestProperties.map((property)=>(
+            <PropertyCard
+              key={property._id}
+              id ={property._id}
+              title = {property.title}
+              price = {property.price}
+              location = {property.location}
+              photo={property.photo}
+            />
+          ))}
+        </Box>
+      </Box>
     </Box>
   )
 }
